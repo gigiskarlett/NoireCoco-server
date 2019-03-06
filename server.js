@@ -5,19 +5,14 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const passport = require('passport');
 
-// Here we use destructuring assignment with renaming so the two variables
-// called router (from ./users and ./auth) have different names
-// For example:
-// const actorSurnames = { james: "Stewart", robert: "De Niro" };
-// const { james: jimmy, robert: bobby } = actorSurnames;
-// console.log(jimmy); // Stewart - the variable name is jimmy, not james
-// console.log(bobby); // De Niro - the variable name is bobby, not robert
+
 const { router: usersRouter } = require('./users');
+const { router: productsRouter } = require('./products');
 const { router: authRouter, localStrategy, jwtStrategy } = require('./auth');
 
 mongoose.Promise = global.Promise;
 
-const { PORT, DATABASE_URL } = require('./config');
+const { PORT, DATABASE_URL, TEST_DATABASE_URL } = require('./config');
 
 const app = express();
 
@@ -38,6 +33,7 @@ app.use(function (req, res, next) {
 passport.use(localStrategy);
 passport.use(jwtStrategy);
 
+app.use('/api/products/', productsRouter);
 app.use('/api/users/', usersRouter);
 app.use('/api/auth/', authRouter);
 
