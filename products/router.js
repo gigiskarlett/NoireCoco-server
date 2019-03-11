@@ -31,7 +31,7 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', jsonParser, (req, res) => {
-  const requiredFields = ['name', 'imageUrl', 'price', 'shortDescription', 'details', 'style'];
+  const requiredFields = ['name', 'imageUrl', 'price', 'shortDescription', 'details', 'style','url'];
   for (let i = 0; i < requiredFields.length; i++) {
     const field = requiredFields[i];
     if (!(field in req.body)) {
@@ -48,7 +48,8 @@ router.post('/', jsonParser, (req, res) => {
       price: req.body.price,
       shortDescription: req.body.shortDescription,
       details: req.body.details,
-      style: req.body.style
+      style: req.body.style,
+      url: req.body.url
     })
     .then(product => res.status(201).json(product.serialize()))
     .catch(err => {
@@ -80,7 +81,7 @@ router.put('/:id',jsonParser, (req, res) => {
   }
 
   const updated = {};
-  const updateableFields = ['name', 'imageUrl', 'price', 'shortDescription', 'details', 'style'];
+  const updateableFields = ['name', 'imageUrl', 'price', 'shortDescription', 'details', 'style', 'url'];
   updateableFields.forEach(field => {
     if (field in req.body) {
       updated[field] = req.body[field];
