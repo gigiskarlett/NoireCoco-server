@@ -28,6 +28,10 @@ const ProductSchema = mongoose.Schema({
   style: {
     type: String,
     required: true
+  },
+  url:{
+    type: String,
+    required:true
   }
 });
 
@@ -39,7 +43,8 @@ ProductSchema.methods.serialize = function() {
     price: this.price || '',
     shortDescription: this.shortDescription || '',
     details: this.details || '',
-    style: this.style || ''
+    style: this.style || '',
+    url: this.url
   };
 };
 
