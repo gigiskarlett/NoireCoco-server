@@ -32,6 +32,14 @@ const ProductSchema = mongoose.Schema({
   url:{
     type: String,
     required:true
+  },
+  secondImage:{
+    type: String,
+    required:true
+  },
+  thirdImage:{
+    type: String,
+    required: true
   }
 });
 
@@ -44,7 +52,9 @@ ProductSchema.methods.serialize = function() {
     shortDescription: this.shortDescription || '',
     details: this.details || '',
     style: this.style || '',
-    url: this.url
+    url: this.url,
+    secondImage: this.secondImage,
+    thirdImage: this.thirdImage
   };
 };
 
