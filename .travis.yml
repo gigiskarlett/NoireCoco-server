@@ -1,4 +1,11 @@
 language: node_js
 node_js: node
 services:
-  - mongodb
+- mongodb
+deploy:
+  provider: heroku
+  api_key:
+    secure: ACqISZyshLXeR0w+VGjhjEJBs7O9cSujwPvwkUwaSqkv9k2+ajWog/31R2d0Qk/pYPqVNTL0Yf6nsmYAEqD2qqD4Sug49FJLSmGbGqfvJ43O/Ny5U3674Ozd8zepzDdSQDwgrNgzwa/XqGywvofdFpAYohfwDWymPy58ivh918B5L9juMQ3jVDlrZJ+9sVtwS4pQoZq+de0Yl5CPcT5QTAKkt8vrvZhsx1f1uUNYbmuW5T7VkVP16y4ESNuysKRtMc2xW0Gjza7BFKCNMIgywq0CjBVl5P/o2fvBPJ4WW9RVSPxTJjHdbcQOWW4QY5kHGZb4hj+w3806EXcEBfwbfp+8dAt6TDGB4cvcW/p0o6MX0ZbAOwnqJJqXQn6inEw9Og7pUN9WMZORGWkZ6YxCPzycJAkgR1WX+HdMmH84Z3hpdzvrVrQEMqc3qq4wut3ko00MmpFcpKJNZnoFLoCgzMSTky2ht9revdmStXzAEihrhLacbh8GynS69d510U0yZeiTp0oM6TBfBCH6ktrQcCztQeTSRZ/SV+nkeDkiQ8mkppd+wXZOZ8cc9zO0jva88SH72QiaYF1uA/7s2VJNzeQoj52t0ioZWtRBF1jUaGPjjrvZ07O6mpnZmoX3DruedSp8+lDCvtRVq8G9N6Fj8aJQ2w1w6swmzCuJr7a9flk=
+  app: fierce-fjord-36510
+  on:
+    repo: gigiskarlett/NoireCoco-server
