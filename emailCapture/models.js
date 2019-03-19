@@ -10,7 +10,7 @@ const EmailCaptureSchema = mongoose.Schema({
   }
 });
 
-EmailCapture.methods.serialize = function() {
+EmailCaptureSchema.methods.serialize = function() {
   return {
     id: this.id,
     email: this.email
