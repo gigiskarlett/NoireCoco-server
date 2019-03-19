@@ -6,6 +6,8 @@ const morgan = require('morgan');
 const passport = require('passport');
 
 
+
+const { router: emailCaptureRouter } = require('./emailCapture');
 const { router: usersRouter } = require('./users');
 const { router: productsRouter } = require('./products');
 const { router: authRouter, localStrategy, jwtStrategy } = require('./auth');
@@ -33,6 +35,7 @@ app.use(function (req, res, next) {
 passport.use(localStrategy);
 passport.use(jwtStrategy);
 
+app.use('/api/subscribe/', emailCaptureRouter);
 app.use('/api/products/', productsRouter);
 app.use('/api/users/', usersRouter);
 app.use('/api/auth/', authRouter);
