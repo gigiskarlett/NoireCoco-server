@@ -1,5 +1,5 @@
 'use strict';
-const {emailCapture} = require('./models');
+const {EmailCapture} = require('./models');
 const {router} = require('./router');
 
-module.exports = {emailCapture, router};
+module.exports = {EmailCapture, router};
