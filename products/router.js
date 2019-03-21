@@ -1,16 +1,15 @@
 "use strict";
 const express = require("express");
 const bodyParser = require("body-parser");
-
+const passport = require("passport");
 const { Product } = require("./models");
-
+const jwtAuth = passport.authenticate("jwt", { session: false });
 const router = express.Router();
 
 const jsonParser = bodyParser.json();
 
 router.get("/", (req, res) => {
-  Product
-    .find()
+  Product.find()
     .sort({
       when: 1
     })
@@ -32,7 +31,7 @@ router.get("/:id", (req, res) => {
     });
 });
 
-router.post("/", jsonParser, (req, res) => {
+router.post("/", jsonParser, jwtAuth, (req, res) => {
   const requiredFields = [
     "name",
     "imageUrl",
@@ -71,7 +70,7 @@ router.post("/", jsonParser, (req, res) => {
     });
 });
 
-router.delete("/:id", (req, res) => {
+router.delete("/:id", jwtAuth, (req, res) => {
   Product.findByIdAndRemove(req.params.id)
     .then(() => {
       res.status(204).json({ message: "success" });
@@ -82,7 +81,7 @@ router.delete("/:id", (req, res) => {
     });
 });
 
-router.put("/:id", jsonParser, (req, res) => {
+router.put("/:id", jsonParser, jwtAuth, (req, res) => {
   if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
     res.status(400).json({
       error: "Request path id and request body id values must match"
@@ -110,13 +109,6 @@ router.put("/:id", jsonParser, (req, res) => {
   Product.findByIdAndUpdate(req.params.id, { $set: updated }, { new: true })
     .then(updatedProduct => res.status(204).end())
     .catch(err => res.status(500).json({ message: "Something went wrong" }));
-});
-
-router.delete("/:id", (req, res) => {
-  Product.findByIdAndRemove(req.params.id).then(() => {
-    console.log(`Deleted blog post with id \`${req.params.id}\``);
-    res.status(204).end();
-  });
 });
 
 module.exports = { router };
