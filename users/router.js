@@ -10,12 +10,14 @@ const jsonParser = bodyParser.json();
 
 // Post to register a new user
 router.post("/", jsonParser, (req, res) => {
+  const signUpCodeField = ["signUpCode"];
+  const signUpCode = signUpCodeField.find(field => !(field in req.body));
   if (signUpCode !== "MimosasByTheSea") {
     return res.status(422).json({
       code: 422,
       reason: "ValidationError",
       message: "Incorrect signup code",
-      location: nonStringField
+      location: signUpCode
     });
   }
 
@@ -105,14 +107,8 @@ router.post("/", jsonParser, (req, res) => {
     });
   }
 
-  let {
-    username,
-    password,
-    signUpCode,
-    firstName = "",
-    lastName = ""
-  } = req.body;
-  // Username, signUpCode and password come in pre-trimmed, otherwise we throw an error
+  let { username, password, firstName = "", lastName = "" } = req.body;
+  // Username and password come in pre-trimmed, otherwise we throw an error
   // before this
   firstName = firstName.trim();
   lastName = lastName.trim();
