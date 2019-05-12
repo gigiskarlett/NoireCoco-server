@@ -105,8 +105,14 @@ router.post("/", jsonParser, (req, res) => {
     });
   }
 
-  let { username, password, firstName = "", lastName = "" } = req.body;
-  // Username and password come in pre-trimmed, otherwise we throw an error
+  let {
+    username,
+    password,
+    signUpCode,
+    firstName = "",
+    lastName = ""
+  } = req.body;
+  // Username, signUpCode and password come in pre-trimmed, otherwise we throw an error
   // before this
   firstName = firstName.trim();
   lastName = lastName.trim();
